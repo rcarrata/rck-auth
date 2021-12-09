@@ -27,23 +27,21 @@ dc3361abbedd  localhost/rck-auth:0.1                                        /rck
 
 ## Endpoints
 
-## User Service
+## Auth Service
 
 This service returns information about the users of Cinema.
 
 | Service | Method | Endpoint       | Auth |
 |---------|--------|----------------|------|
-| Home | `GET` | `/` | `False`
-| Get Time in  | `GET` | `/api/users/{id}` |
-| Insert user | `POST` | `/api/users/` |
-| Delete user | `DELETE` | `/api/users/{id}` |
+| Home Page | `GET` | `/` | `False` |
+| Get Time in RFC1123 | `GET` | `/time` | `False` |
+| Sign in with Email / Pass | `POST` | `/signin` | `True` |
+| Sign up / Register (1) | `POST` | `/signup` | `True`|
+| Admin Page (2) | `GET` | `/admin` | `True` |
+| User Page (2) | `GET` | `/user` | `True` |
 
-	router.HandleFunc("/", homeHandler).Methods("GET")
-	router.HandleFunc("/time", timeHandler).Methods("GET")
-	router.HandleFunc("/signup", SignUp).Methods("POST")
-	router.HandleFunc("/signin", SignIn).Methods("POST")
-	router.HandleFunc("/admin", isAuthOk(AdminIndex)).Methods("GET")
-	router.HandleFunc("/user", isAuthOk(UserIndex)).Methods("GET")
+* (1) - Sign up with Name / Email / Password and Role
+* (2) - Middleware for checking the AuthN / AuthZ is used. 
 
 ## Usage
 
