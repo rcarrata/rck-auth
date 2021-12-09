@@ -1,6 +1,6 @@
 # RCK Auth Application
 
-Example App written in Golang for provide OpenID Authentication using JWT tokens
+Example App written in Golang for provide Authentication & Authorization using Json Web Tokens.
 
 ## Run with Docker / Podman
 
@@ -29,7 +29,7 @@ dc3361abbedd  localhost/rck-auth:0.1                                        /rck
 
 ## Auth Service
 
-This service returns information about the users of Cinema.
+This service provides an API to users to signin / signup, managing the AuthN & AuthZ with JWT Tokens:
 
 | Service | Method | Endpoint       | Auth |
 |---------|--------|----------------|------|
