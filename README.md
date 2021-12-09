@@ -60,7 +60,7 @@ DELETE from users;
 
 * Perform a Select of the user generated in step before:
 ```
-SELECT * FROM USERS WHERE email = 'rober16@test.com' ORDER BY id LIMIT 1;
+SELECT * FROM USERS WHERE email = 'rober1@test.com' ORDER BY id LIMIT 1;
 ```
 
 * Signing with the Email / Password, and receive a Token JWT:
