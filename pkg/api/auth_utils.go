@@ -71,7 +71,7 @@ func GenerateJWT(email string, role string) (string, error) {
 
 	// Sign the token with the signingkey defined in the step before
 	tokenStr, err := token.SignedString(signingKey)
-	if err != nil {ˆ
+	if err != nil {
 		logrus.Fatalln("Error during the Signing Token:", err.Error())
 		return "", err
 	}
