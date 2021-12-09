@@ -4,7 +4,7 @@ test: lint unit-test
 NAME=rck-auth
 VERSION=0.1
 REGISTRY="quay.io/rcarrata"
-TOOL="docker"
+TOOL="podman"
 
 install:
 	@go build .
