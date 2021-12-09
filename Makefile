@@ -2,7 +2,7 @@ all: build tag push
 test: lint unit-test
 
 NAME=rck-auth
-VERSION=0.1
+VERSION=0.2
 REGISTRY="quay.io/rcarrata"
 TOOL="podman"
 

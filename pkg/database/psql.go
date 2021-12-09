@@ -1,12 +1,11 @@
 package database
 
 import (
-	
 	"github.com/jinzhu/gorm"
 	_ "github.com/lib/pq"
 	"github.com/sirupsen/logrus"
-	utils "github.com/rcarrata/rck-auth/pkg/utils"
 
+	util "github.com/rcarrata/rck-auth/pkg/utils"
 )
 
 // User store User details
@@ -23,9 +22,9 @@ type User struct {
 func GetDatabase() *gorm.DB {
 
 	// DB params are first retrieved from env variables and if not, default params are applied
-	db_name := utils.getEnv("DB_NAME", "postgres")
-	db_pass := utils.getEnv("DB_PASS", "1312")
-	db_host := utils.getEnv("DB_HOST", "127.0.0.1")
+	db_name := util.GetEnv("DB_NAME", "postgres")
+	db_pass := util.GetEnv("DB_PASS", "1312")
+	db_host := util.GetEnv("DB_HOST", "127.0.0.1")
 	databaseurl := "postgres://postgres:" + db_pass + "@" + db_host + "/" + db_name + "?sslmode=disable"
 
 	// fmt.Println(databaseurl)
@@ -48,7 +47,6 @@ func GetDatabase() *gorm.DB {
 	return connection
 
 }
-
 
 // Add the InitialMigration for the DB
 func InitialMigration() {
