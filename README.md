@@ -49,7 +49,7 @@ podman ps -a
 
 * Define a signup with the Name, Email, Password and Role in the /signup path of the API:
 ```
-curl -X POST -H "Content-Type: application/json" -d '{"Name":"Rober", "Email":"rober16@test.com", "Password": "rober", "Role":"admin"}' http://localhost:8082/signup | jq -r .
+curl -X POST -H "Content-Type: application/json" -d '{"Name":"Rober", "Email":"rober1@test.com", "Password": "rober", "Role":"admin"}' http://localhost:8082/signup | jq -r .
 ```
 
 * Check into the DB if it's the user is generated and stored properly:
@@ -68,7 +68,7 @@ SELECT * FROM USERS WHERE email = 'rober16@test.com' ORDER BY id LIMIT 1;
 * Signing with the Email / Password, and receive a Token JWT:
 
 ```
-curl -X POST -H "Content-Type: application/json" -d '{"Email":"rober16@test.com","Password":"rober"}' http://localhost:8082/signin | jq -r .
+curl -X POST -H "Content-Type: application/json" -d '{"Email":"rober1@test.com","Password":"rober"}' http://localhost:8082/signin | jq -r .
 
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJlbWFpbCI6InJvYmVyMTVAdGVzdC5jb20iLCJleHAiOjE2Mzg3MjkxODgsInJvbGUiOiJBZG1pbiJ9.OPl3zntUt8CNj2jq7iNsJfJIlgGKQDWf7pyFdrRfjWs
 ```
@@ -76,7 +76,7 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJlbWFpbCI6InJvYmV
 * Retrieve the token and save it in a variable:
 
 ```
-TOKEN=$(curl -X POST -H "Content-Type: application/json" -d '{"Name":"Rober", "Email":"rober16@test.com", "Role":"admin", "Password":"rober"}' http://localhost:8082/signin | jq -r .)
+TOKEN=$(curl -X POST -H "Content-Type: application/json" -d '{"Name":"Rober", "Email":"rober1@test.com", "Role":"admin", "Password":"rober"}' http://localhost:8082/signin | jq -r .)
 ```
 
 * Login with the token towards the /admin:
