@@ -58,7 +58,7 @@ func InitializeRoute() {
 	router.HandleFunc("/admin", isAuthOk(AdminIndex)).Methods("GET")
 	router.HandleFunc("/user", isAuthOk(UserIndex)).Methods("GET")
 
-	// Option Methods
+	// Option Methods - Enabling CORS
 	router.Methods("OPTIONS").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "")
 		w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")

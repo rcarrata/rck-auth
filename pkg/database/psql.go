@@ -1,10 +1,10 @@
 package database
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/jinzhu/gorm"
+	_ "github.com/lib/pq"
 	"github.com/sirupsen/logrus"
 )
 
@@ -20,15 +20,16 @@ type User struct {
 // Connect to the Postgresql Database
 // TODO: Use Viper handle the psql parameters
 func GetDatabase() *gorm.DB {
+
+	// DB params are first retrieved from env variables and if not, default params are applied
 	db_name := getEnv("DB_NAME", "postgres")
 	db_pass := getEnv("DB_PASS", "1312")
 	db_host := getEnv("DB_HOST", "127.0.0.1")
-
 	databaseurl := "postgres://postgres:" + db_pass + "@" + db_host + "/" + db_name + "?sslmode=disable"
 
-	fmt.Println(databaseurl)
-
+	// fmt.Println(databaseurl)
 	connection, err := gorm.Open(db_name, databaseurl)
+
 	sqldb := connection.DB()
 
 	// Check the Database URL
