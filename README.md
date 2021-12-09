@@ -25,6 +25,26 @@ podman ps -a
 dc3361abbedd  localhost/rck-auth:0.1                                        /rck-auth             10 minutes ago  Up 10 minutes ago  0.0.0.0:8080->8080/tcp  app
 ```
 
+## Endpoints
+
+## User Service
+
+This service returns information about the users of Cinema.
+
+| Service | Method | Endpoint       | Auth |
+|---------|--------|----------------|------|
+| Home | `GET` | `/` | `False`
+| Get Time in  | `GET` | `/api/users/{id}` |
+| Insert user | `POST` | `/api/users/` |
+| Delete user | `DELETE` | `/api/users/{id}` |
+
+	router.HandleFunc("/", homeHandler).Methods("GET")
+	router.HandleFunc("/time", timeHandler).Methods("GET")
+	router.HandleFunc("/signup", SignUp).Methods("POST")
+	router.HandleFunc("/signin", SignIn).Methods("POST")
+	router.HandleFunc("/admin", isAuthOk(AdminIndex)).Methods("GET")
+	router.HandleFunc("/user", isAuthOk(UserIndex)).Methods("GET")
+
 ## Usage
 
 * Define a signup with the Name, Email, Password and Role in the /signup path of the API:

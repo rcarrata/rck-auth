@@ -3,12 +3,22 @@ package api
 import (
 	"encoding/json"
 	"net/http"
+	"time"
 
-	"github.com/sirupsen/logrus"
 	db "github.com/rcarrata/rck-auth/pkg/database"
-
-
+	"github.com/sirupsen/logrus"
 )
+
+// Home Page Handler (No Auth Required)
+func homeHandler(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Welcome to the Home Page [No Auth Required]\n"))
+}
+
+// Time Page Handler (No Auth Required)
+func timeHandler(w http.ResponseWriter, r *http.Request) {
+	tm := time.Now().Format(time.RFC1123)
+	w.Write([]byte("The time is: " + tm))
+}
 
 func SignUp(w http.ResponseWriter, r *http.Request) {
 	connection := db.GetDatabase()

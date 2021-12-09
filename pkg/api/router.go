@@ -4,7 +4,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"time"
 
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
@@ -36,17 +35,6 @@ type Error struct {
 // CreateRouter generates a new instance of Mux Router
 func CreateRouter() {
 	router = mux.NewRouter()
-}
-
-// Home Page Handler (No Auth Required)
-func homeHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Welcome to the Home Page [No Auth Required]\n"))
-}
-
-// Time Page Handler (No Auth Required)
-func timeHandler(w http.ResponseWriter, r *http.Request) {
-	tm := time.Now().Format(time.RFC1123)
-	w.Write([]byte("The time is: " + tm))
 }
 
 // InitializeRoute creates handlers for the mux Router to handle
