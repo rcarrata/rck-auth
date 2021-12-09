@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: postgres12
+  name: postgres12
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres12
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: postgres12
+    spec:
+      containers:
+      - image: docker.io/postgres:12
+        name: postgres
+        resources: {}
+        envFrom:
+        - secretRef:
+            name: db-config
+

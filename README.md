@@ -131,3 +131,25 @@ go run main.go
 podman build -t localhost/rck-auth:ubi8 -f Dockerfile.ubi8
 ```
 
+## Deploy in OpenShift
+
+```
+oc new-app postgresql-ephemeral --name=postgres12 --template=postgresql-ephemeral --param=POSTGRESQL_PASSWORD=1312 --param=POSTGRESQL_USER=postgres --param=POSTGRESQL_DATABASE=postgres
+```
+
+```
+oc run rck-auth --env="PORT=8080" --env="DB_HOST=postgresql" --image=quay.io/rcarrata/rck-auth:0.1
+```
+
+```
+oc expose pod/rck-auth --port=808
+```
+
+```
+oc expose svc/rck-auth
+```
+
+```
+APP_ROUTE=$(oc get route rck-auth -o jsonpath={.spec.host})
+curl $APP_ROUTE
+```

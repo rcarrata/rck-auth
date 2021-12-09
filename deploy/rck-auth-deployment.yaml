@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: rck-auth
+  name: rck-auth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rck-auth
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: rck-auth
+    spec:
+      containers:
+      - image: quay.io/rcarrata/rck-auth:0.1
+        name: rck-auth
+        resources: {}
+        envFrom:
+        - configMapRef:
+            name: rck-auth-config
