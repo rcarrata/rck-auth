@@ -2,7 +2,7 @@
 
 Example App written in Golang for provide OpenID Authentication using JWT tokens
 
-## Install
+## Run with Docker / Podman
 
 * Run a Postgresql exposing the port to 5432 and defining a Postgres Password:
 
@@ -10,30 +10,10 @@ Example App written in Golang for provide OpenID Authentication using JWT tokens
 podman run --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=1312 -d postgres
 ```
 
-* Define an local user for the app:
-```
-psql -h localhost -p 5432 -U postgres
-create user userdb;
-ALTER USER userdb WITH PASSWORD '1312';
-\du
-```
-
-* (OPTIONAL) - Export the PORT to run the server and run the app:
-```
-export PORT=8081
-go run main.go
-```
-
-* Build the container with the Dockerfile:
-
-```
-podman build -t localhost/rck-auth:ubi8 -f Dockerfile.ubi8
-```
-
 * Run the container, defining the DB_HOST (in my case cni_podman IP) running the PSQL:
 
 ```
-podman run -dt -p 8080:8080 -e PORT=8082 -e DB_HOST=10.88.0.1 localhost/rck-auth:ubi8
+podman run -dt -p 8080:8080 -e PORT=8082 -e DB_HOST=10.88.0.1 quay.io/rcarrata/rck-auth:0.1
 ```
 
 * Check that everything is working ok:
@@ -41,11 +21,11 @@ podman run -dt -p 8080:8080 -e PORT=8082 -e DB_HOST=10.88.0.1 localhost/rck-auth
 ```
 podman ps -a
 
-72d802cc3b54  docker.io/library/postgres:latest                             postgres              4 hours ago    Up 4 hours ago    0.0.0.0:5432->5432/tcp  postgres
-56964a619719  localhost/rck-auth:ubi8                                       /app                  9 minutes ago  Up 9 minutes ago  0.0.0.0:8080->8080/tcp  app
+72d802cc3b54  docker.io/library/postgres:latest                             postgres              7 hours ago     Up 7 hours ago     0.0.0.0:5432->5432/tcp  postgres
+dc3361abbedd  localhost/rck-auth:0.1                                        /rck-auth             10 minutes ago  Up 10 minutes ago  0.0.0.0:8080->8080/tcp  app
 ```
 
-## Usage:
+## Usage
 
 * Define a signup with the Name, Email, Password and Role in the /signup path of the API:
 ```
@@ -110,3 +90,26 @@ Not authorized. User Only!
 ```
 
 as you can see the Role used is not authorized, and a 403 Forbidden error is raised.
+
+## Develop
+
+* Define an local user for the app:
+```
+psql -h localhost -p 5432 -U postgres
+create user userdb;
+ALTER USER userdb WITH PASSWORD '1312';
+\du
+```
+
+* (OPTIONAL) - Export the PORT to run the server and run the app:
+```
+export PORT=8081
+go run main.go
+```
+
+* Build the container with the Dockerfile:
+
+```
+podman build -t localhost/rck-auth:ubi8 -f Dockerfile.ubi8
+```
+
