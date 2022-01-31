@@ -128,7 +128,7 @@ go run main.go
 * Build the container with the Dockerfile:
 
 ```
-podman build -t localhost/rck-auth:ubi8 -f Dockerfile.ubi8
+podman build -t localhost/rck-auth:v2 -f Containerfile
 ```
 
 ## Deploy in OpenShift
